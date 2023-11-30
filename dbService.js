@@ -48,9 +48,24 @@ async function getAllData() {
     }
 }
 
-async function insertNewWord() {
+async function insertNewWord(data) {
     try {
+        var sqlMaxId = `SELECT max(id) FROM table_word`
+        connection.query(sqlMaxId, function (err, result) {
+            if(err) throw err;
+            var maxId = result
+        })
+        
+        let id = maxId + 1;
+        let word = data.word
+        
 
+
+        var sql = `INSERT INTO table_word (id, worden, date, level) VALUES (${maxId}+1, 'word', ${date}, 2)`
+        connection.query(sql, function (err, result) {
+            if(err) throw err;
+            console.log("1 record inserted")
+        })
     } catch (error) {
         
     }

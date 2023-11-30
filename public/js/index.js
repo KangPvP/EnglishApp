@@ -9,19 +9,29 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHTMLTable([])
 })
 
-const From__add = document.getElementById('From__add');
-From__add.onsubmit = async (event) => {
-    event.preventDefault();
 
-    let response = await fetch('http://localhost:3000/getAll', {
+let myUsername = document.getElementsByName('From__add__input');
+console.log(myUsername[0]);
+
+let Fromadd = document.getElementById('From__add');
+Fromadd.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("esd")
+    let valuess = new FormData(Fromadd)
+
+    for (const pair of valuess.entries()) {
+        console.log(`${pair[0]}, ${pair[1]}`);
+      }
+
+    let response = fetch('http://localhost:3000/getAll', {
         method: 'POST',
-        body: new FormData(From__add)
+        body: new FormData(Fromadd)
     })
 
-    let result = await response.json();
+    let result = response.json();
     alert(result.message);
 
-}
+})
 
 
 
