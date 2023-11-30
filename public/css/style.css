@@ -1,0 +1,33 @@
+.center {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  vertical-align: middle;
+}
+
+.From {
+  display: inline-block;
+  vertical-align: middle;
+  width: 400px;
+  background-color: aquamarine;
+}
+.From__attribut {
+  display: inline-block;
+  padding: 20px;
+}
+
+.Table {
+  display: inline-block;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  margin-top: 30px;
+}
+.Table__header {
+  background-color: #ff6161;
+}
+.Table__cell {
+  width: 150px;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  text-align: center;
+}/*# sourceMappingURL=style.css.map */
