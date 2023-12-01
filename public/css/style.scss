@@ -4,16 +4,24 @@
     width: 100vw;
     vertical-align: middle;
 }
-.From {
+.Form {
     display: inline-block;
     vertical-align: middle;
     width: 400px;
     background-color: aquamarine;
 
     &__attribut {
+        label, input {
+            margin-left: auto;
+            
+        }
+        
         display: inline-block;
         padding: 20px;
     }
+
+
+
 
 }
 

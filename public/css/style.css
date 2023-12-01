@@ -5,15 +5,18 @@
   vertical-align: middle;
 }
 
-.From {
+.Form {
   display: inline-block;
   vertical-align: middle;
   width: 400px;
   background-color: aquamarine;
 }
-.From__attribut {
+.Form__attribut {
   display: inline-block;
   padding: 20px;
+}
+.Form__attribut label, .Form__attribut input {
+  margin-left: auto;
 }
 
 .Table {

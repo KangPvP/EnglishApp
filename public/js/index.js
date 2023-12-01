@@ -10,28 +10,36 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-let myUsername = document.getElementsByName('From__add__input');
-console.log(myUsername[0]);
-
-let Fromadd = document.getElementById('From__add');
-Fromadd.addEventListener("submit", (e) => {
+let Formadd = document.getElementById('Form__add');
+Formadd.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("esd")
-    let valuess = new FormData(Fromadd)
 
-    for (const pair of valuess.entries()) {
-        console.log(`${pair[0]}, ${pair[1]}`);
-      }
+    let formData = new FormData(Formadd);
 
-    let response = fetch('http://localhost:3000/getAll', {
+    // Accédez aux valeurs du formulaire à l'aide de formData.get
+    let worden = formData.get('Form__add__worden');
+    let wordfr = formData.get('Form__add__wordfr');
+    let level = formData.get('Form__add__level');
+
+    let jsonData = JSON.stringify({ "Form__add__worden": worden, "Form__add__wordfr": wordfr, "Form__add__level": level });
+    console.log(jsonData);
+    console.log("truc");
+
+    fetch('http://localhost:3000/inserts', {
+        headers: {
+            'Content-type': 'application/json'
+        },
         method: 'POST',
-        body: new FormData(Fromadd)
+        body: jsonData
     })
+    .then(response => response.json())
+    .then(data => insertRowIntoTable(data['data']))
+    .catch(error => console.error('Erreur lors de la requête :', error));
+});
 
-    let result = response.json();
-    alert(result.message);
+function insertRowIntoTable(data) {
 
-})
+}
 
 
 
