@@ -25,14 +25,15 @@ app.listen(3000, () => {
 app.post('/inserts', async (request, response) => {
     let formData = request.body;
     
-    console.log("testss")
-    console.log(request.body)
-    console.log("tes")
-    
     try {
-        await dbService.insertword(formData);
+        // Utiliser la fonction insertNewWord pour insérer les données
+        const insertedData = await dbService.insertword(formData);
 
-        response.json({ sucess: true });
+        console.log(insertedData);
+        console.log("test Success");
+
+        // Utiliser response.json pour envoyer la réponse au client
+        response.json({ success: true, data: insertedData });
     } catch (error) {
         console.log(error);
         response.status(500).json({ error: 'Internal Server Error' });

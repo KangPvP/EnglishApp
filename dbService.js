@@ -65,30 +65,32 @@ async function getMaxId(){
 
 async function insertNewWord(data) {
     try {
+        let maxId = await getMaxId();
+        let id = maxId + 1;
+        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        let worden = data.Form__add__worden;
+        let wordfr = data.Form__add__wordfr;
+        let level = data.Form__add__level;
 
-        let maxId = await getMaxId()
+        let dataReturn = {id: id, worden: worden, wordfr: wordfr, date: date, level: level}
 
-        const insertWord = await new Promise((resolve, reject) => {
+        let sql = `INSERT INTO table_word (id, worden, wordfr, date, level) VALUES (?, ?, ?, ?, ?)`;
+        let values = [id, worden, wordfr, date, level];
 
-            let id = maxId + 1;
-            let date = Date.now()
-            let worden = data.Form__add__worden
-            let wordfr = data.Form__add__wordfr
-            let level = data.Form__add__level
-
-            let sql = `INSERT INTO table_word (id, worden, wordfr, date, level) VALUES (?, ?, ?, ?, ?)`;
-            let values = [id, worden, wordfr, date, level];
-            console.log(values)
-
+        // Utilisez la fonction query avec une promesse
+        const result = await new Promise((resolve, reject) => {
             connection.query(sql, values, function (err, result) {
-                if(err) throw err;
-                resolve(result.insertWord);
-            })
-        })
-        console.log(insertWord)
-        return response;
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+
+        console.log(dataReturn);
+        return dataReturn;
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        // Si une erreur se produit, vous pouvez rejeter la promesse ici si nécessaire
+        throw error;
     }
     
 }
